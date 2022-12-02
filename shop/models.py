@@ -40,15 +40,15 @@ class Product(models.Model):
     price = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
     is_available = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name="procat")
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     is_featured = models.BooleanField()
 
 
-    # def get_url(self):
+    def get_url(self):
 
-    #     return reverse('products_details',args=[self.category.slug,self.slug])
+        return reverse('products_details',args=[self.category.slug,self.slug])
 
     def __str__(self):
         return self.product_name
@@ -64,11 +64,9 @@ class Banner(models.Model):
     def __str__(self):
         return self.title
 
-
-
 class ProductVaraiant(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    color = models.ForeignKey(Colour,on_delete=models.CASCADE,blank=True, null=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name="variations")
+    color = models.ForeignKey(Colour,on_delete=models.CASCADE,blank=True, null=True,related_name="color")
     size = models.ForeignKey(Size, on_delete=models.CASCADE,blank=True, null=True)
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE,blank=True, null=True)
     amount_in_stock = models.IntegerField()
@@ -83,6 +81,17 @@ class ProductVaraiant(models.Model):
 
     def __str__(self):
         return self.product.product_name
+
+
+class ProductGallery(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    images = models.ImageField(upload_to='photos/products')
+
+    def __str__(self):
+        return self.product.product_name
+    
+    class Meta:
+        verbose_name_plural = "Product Gallery"
 
 
 

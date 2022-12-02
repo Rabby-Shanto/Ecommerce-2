@@ -70,13 +70,12 @@
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         {% for i in variation %}
-                        {% ifchanged i.color %}
+
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input filter-checkbox" id="{{i.color.id}}" data-filter="color">
-                            <label class="custom-control-label" for="{{i.color.id}}">{{i.color}}</label>
+                            <input type="checkbox" class="custom-control-input filter-checkbox" id="{{i.color__title}}" data-filter="color">
+                            <label class="custom-control-label" for="{{i.color__title}}">{{i.color__title}}</label>
                             <span class="badge border font-weight-normal">150</span>
                         </div>
-                        {% endifchanged %}
                         {% endfor %}
                     </form>
                 </div>
@@ -154,10 +153,10 @@
                     </div>
 
                     {% for product in products %}
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4 h-100">
+                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1 mb-3">
+                        <div class="product-item bg-light h-100">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="{{product.images.url}}" alt="">
+                                <img class="img-fluid w-100" style= " height: 200px;object-fit: cover;"  src="{{product.images.url}}" alt="">
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
